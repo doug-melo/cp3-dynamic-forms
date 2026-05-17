@@ -230,7 +230,7 @@ export function DynamicField({ error, field, value, onChange }: DynamicFieldProp
         style={[styles.checkboxRow, isEnabled && styles.checkboxRowActive, error && styles.inputError]}
       >
         <View style={[styles.checkboxBox, isEnabled && styles.checkboxBoxActive]}>
-          {isEnabled && <Text style={styles.checkboxCheck}>OK</Text>}
+          {isEnabled && <Text style={styles.checkboxCheck}>✓</Text>}
         </View>
         <Text style={styles.checkboxText}>{field.label}</Text>
       </Pressable>
@@ -409,8 +409,9 @@ const styles = StyleSheet.create({
   },
   checkboxCheck: {
     color: '#FFFFFF',
-    fontSize: 14,
+    fontSize: 16,
     fontWeight: '900',
+    lineHeight: 18,
   },
   checkboxText: {
     color: '#1F2937',
