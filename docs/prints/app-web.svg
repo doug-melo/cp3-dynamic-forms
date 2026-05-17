@@ -1,0 +1,42 @@
+<svg width="1200" height="780" viewBox="0 0 1200 780" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="780" fill="#F4F7F6"/>
+  <rect x="250" y="42" width="700" height="696" rx="18" fill="#F4F7F6"/>
+  <text x="280" y="86" fill="#0F766E" font-family="Arial, sans-serif" font-size="18" font-weight="800">CP3 REACT NATIVE</text>
+  <text x="280" y="128" fill="#111827" font-family="Arial, sans-serif" font-size="40" font-weight="900">Cadastro Profissional</text>
+
+  <g font-family="Arial, sans-serif">
+    <text x="280" y="183" fill="#1F2937" font-size="17" font-weight="700">Nome completo *</text>
+    <rect x="280" y="196" width="640" height="54" rx="8" fill="#FFFFFF" stroke="#CBD5E1"/>
+    <text x="298" y="230" fill="#111827" font-size="18">Douglas Melo</text>
+
+    <text x="280" y="286" fill="#1F2937" font-size="17" font-weight="700">E-mail *</text>
+    <rect x="280" y="299" width="640" height="54" rx="8" fill="#FFFFFF" stroke="#CBD5E1"/>
+    <text x="298" y="333" fill="#111827" font-size="18">nome@email.com</text>
+
+    <text x="280" y="389" fill="#1F2937" font-size="17" font-weight="700">Genero *</text>
+    <rect x="280" y="402" width="204" height="48" rx="8" fill="#EAF6F2" stroke="#0F766E"/>
+    <circle cx="304" cy="426" r="8" fill="#0F766E"/>
+    <text x="324" y="432" fill="#0F766E" font-size="17" font-weight="700">Masculino</text>
+    <rect x="498" y="402" width="204" height="48" rx="8" fill="#FFFFFF" stroke="#CBD5E1"/>
+    <circle cx="522" cy="426" r="8" fill="#FFFFFF" stroke="#94A3B8" stroke-width="2"/>
+    <text x="542" y="432" fill="#334155" font-size="17">Feminino</text>
+    <rect x="716" y="402" width="204" height="48" rx="8" fill="#FFFFFF" stroke="#CBD5E1"/>
+    <circle cx="740" cy="426" r="8" fill="#FFFFFF" stroke="#94A3B8" stroke-width="2"/>
+    <text x="760" y="432" fill="#334155" font-size="17">Outro</text>
+
+    <text x="280" y="492" fill="#1F2937" font-size="17" font-weight="700">Estado *</text>
+    <rect x="280" y="505" width="305" height="54" rx="8" fill="#FFFFFF" stroke="#CBD5E1"/>
+    <text x="298" y="539" fill="#111827" font-size="18">SP</text>
+    <text x="555" y="539" fill="#334155" font-size="18" font-weight="800">v</text>
+
+    <text x="615" y="492" fill="#1F2937" font-size="17" font-weight="700">Data de nascimento *</text>
+    <rect x="615" y="505" width="305" height="54" rx="8" fill="#FFFFFF" stroke="#CBD5E1"/>
+    <text x="633" y="539" fill="#111827" font-size="18">2000-05-18</text>
+
+    <rect x="280" y="598" width="640" height="56" rx="8" fill="#0F766E"/>
+    <text x="575" y="633" text-anchor="middle" fill="#FFFFFF" font-size="19" font-weight="800">Salvar</text>
+
+    <rect x="280" y="682" width="640" height="1" fill="#D5E4DF"/>
+    <text x="280" y="714" fill="#0F766E" font-size="22" font-weight="800">Resultado salvo</text>
+  </g>
+</svg>
