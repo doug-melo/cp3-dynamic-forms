@@ -25,11 +25,11 @@ export const formConfig: FormConfig = {
       placeholder: 'Crie uma senha',
     },
     {
-      id: 'age',
-      label: 'Idade',
+      id: 'experienceYears',
+      label: 'Anos de experiencia',
       type: 'number',
       required: true,
-      placeholder: '18',
+      placeholder: '2',
     },
     {
       id: 'bio',
@@ -78,7 +78,7 @@ export const formConfig: FormConfig = {
       label: 'Data de nascimento',
       type: 'date',
       required: true,
-      placeholder: 'AAAA-MM-DD',
+      placeholder: 'dd-mm-yyyy',
     },
     {
       id: 'terms',

@@ -60,4 +60,8 @@ src/
 
 ## Integrantes
 
-- Douglas Melo - RM A INFORMAR
+- Henrique Sanches - RM557959
+- João Pedro Kraide Máximo - RM563166
+- Douglas dos Santos Melo - RM556439
+- Nicolas Caciolato Reis - RM556506
+- Matheus Marcelino Dantas da Silva - RM556332

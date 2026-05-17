@@ -24,12 +24,23 @@ const isEmptyValue = (value: FormValue): boolean => {
 const isValidEmail = (value: string): boolean => /^\S+@\S+\.\S+$/.test(value);
 
 const isValidDate = (value: string): boolean => {
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) {
+  const match = /^(\d{2})-(\d{2})-(\d{4})$/.exec(value);
+
+  if (match === null) {
     return false;
   }
 
-  const parsedDate = new Date(`${value}T00:00:00`);
-  return !Number.isNaN(parsedDate.getTime()) && parsedDate.toISOString().startsWith(value);
+  const [, dayText, monthText, yearText] = match;
+  const day = Number(dayText);
+  const month = Number(monthText);
+  const year = Number(yearText);
+  const parsedDate = new Date(year, month - 1, day);
+
+  return (
+    parsedDate.getFullYear() === year &&
+    parsedDate.getMonth() === month - 1 &&
+    parsedDate.getDate() === day
+  );
 };
 
 export const validateForm = (fields: FieldConfig[], values: FormValues): ValidationErrors =>
@@ -50,7 +61,7 @@ export const validateForm = (fields: FieldConfig[], values: FormValues): Validat
       }
 
       if (field.type === 'date' && !isValidDate(value)) {
-        return { ...errors, [field.id]: 'Use o formato AAAA-MM-DD.' };
+        return { ...errors, [field.id]: 'Use o formato dd-mm-yyyy.' };
       }
     }
 
