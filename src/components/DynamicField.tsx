@@ -1,5 +1,7 @@
-import { ReactElement, useMemo, useState } from 'react';
+import DateTimePicker, { DateTimePickerEvent } from '@react-native-community/datetimepicker';
+import React, { ChangeEvent, CSSProperties, ReactElement, useMemo, useState } from 'react';
 import {
+  Platform,
   Pressable,
   StyleSheet,
   Switch,
@@ -17,8 +19,34 @@ interface DynamicFieldProps {
   onChange: (fieldId: string, value: FormValue) => void;
 }
 
+const toWebDateValue = (value: FormValue): string => {
+  if (typeof value !== 'string') {
+    return '';
+  }
+
+  const match = /^(\d{2})-(\d{2})-(\d{4})$/.exec(value);
+  return match === null ? '' : `${match[3]}-${match[2]}-${match[1]}`;
+};
+
+const toDisplayDateValue = (value: string): string => {
+  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value);
+  return match === null ? '' : `${match[3]}-${match[2]}-${match[1]}`;
+};
+
+const toDatePickerValue = (value: FormValue): Date => {
+  const webValue = toWebDateValue(value);
+
+  if (webValue.length === 0) {
+    return new Date();
+  }
+
+  const [year, month, day] = webValue.split('-').map(Number);
+  return new Date(year, month - 1, day);
+};
+
 export function DynamicField({ error, field, value, onChange }: DynamicFieldProps) {
   const [isSelectOpen, setIsSelectOpen] = useState(false);
+  const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
   const selectedLabel = useMemo(() => {
     if (typeof value !== 'string') {
       return 'Selecione';
@@ -29,6 +57,25 @@ export function DynamicField({ error, field, value, onChange }: DynamicFieldProp
 
   const handleTextChange = (nextValue: string): void => {
     onChange(field.id, nextValue);
+  };
+
+  const handleWebDateChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    onChange(field.id, toDisplayDateValue(event.target.value));
+  };
+
+  const handleNativeDateChange = (event: DateTimePickerEvent, selectedDate?: Date): void => {
+    if (Platform.OS === 'android') {
+      setIsDatePickerOpen(false);
+    }
+
+    if (event.type === 'dismissed' || selectedDate === undefined) {
+      return;
+    }
+
+    const day = String(selectedDate.getDate()).padStart(2, '0');
+    const month = String(selectedDate.getMonth() + 1).padStart(2, '0');
+    const year = selectedDate.getFullYear();
+    onChange(field.id, `${day}-${month}-${year}`);
   };
 
   const handleOptionPress = (option: FieldOption): void => {
@@ -72,6 +119,61 @@ export function DynamicField({ error, field, value, onChange }: DynamicFieldProp
       value={typeof value === 'string' ? value : ''}
     />
   );
+
+  const renderDateInput = (): ReactElement => {
+    if (Platform.OS === 'web') {
+      const webStyle: CSSProperties = {
+        backgroundColor: '#FFFFFF',
+        borderColor: error ? '#D92D20' : '#CBD5E1',
+        borderRadius: 8,
+        borderStyle: 'solid',
+        borderWidth: 1,
+        boxSizing: 'border-box',
+        color: '#111827',
+        fontSize: 16,
+        minHeight: 48,
+        outlineColor: '#0F766E',
+        padding: '12px 14px',
+        width: '100%',
+      };
+
+      return (
+        <>
+          {React.createElement('input', {
+            'aria-label': field.label,
+            onChange: handleWebDateChange,
+            style: webStyle,
+            type: 'date',
+            value: toWebDateValue(value),
+          })}
+        </>
+      );
+    }
+
+    const displayValue = typeof value === 'string' && value.length > 0 ? value : field.placeholder;
+
+    return (
+      <View>
+        <Pressable
+          accessibilityRole="button"
+          onPress={() => setIsDatePickerOpen(true)}
+          style={[styles.input, styles.dateInput, error && styles.inputError]}
+        >
+          <Text style={[styles.selectText, displayValue === field.placeholder && styles.placeholderText]}>
+            {displayValue}
+          </Text>
+        </Pressable>
+        {isDatePickerOpen && (
+          <DateTimePicker
+            display={Platform.OS === 'ios' ? 'spinner' : 'default'}
+            mode="date"
+            onChange={handleNativeDateChange}
+            value={toDatePickerValue(value)}
+          />
+        )}
+      </View>
+    );
+  };
 
   const renderOptions = (variant: 'radio' | 'select'): ReactElement => (
     <View style={variant === 'radio' ? styles.choiceGroup : styles.dropdownList}>
@@ -146,6 +248,8 @@ export function DynamicField({ error, field, value, onChange }: DynamicFieldProp
         return renderBooleanInput('checkbox');
       case 'switch':
         return renderBooleanInput('switch');
+      case 'date':
+        return renderDateInput();
       default:
         return renderTextInput();
     }
@@ -198,6 +302,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
+  },
+  dateInput: {
+    justifyContent: 'center',
   },
   selectText: {
     color: '#111827',
