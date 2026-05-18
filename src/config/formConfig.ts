@@ -26,7 +26,7 @@ export const formConfig: FormConfig = {
     },
     {
       id: 'experienceYears',
-      label: 'Anos de experiencia',
+      label: 'Anos de experiência',
       type: 'number',
       required: true,
       placeholder: '2',
@@ -36,11 +36,11 @@ export const formConfig: FormConfig = {
       label: 'Resumo profissional',
       type: 'textarea',
       required: true,
-      placeholder: 'Conte um pouco sobre sua experiencia',
+      placeholder: 'Conte um pouco sobre sua experiência',
     },
     {
       id: 'gender',
-      label: 'Genero',
+      label: 'Gênero',
       type: 'radio',
       required: true,
       options: [
@@ -63,7 +63,7 @@ export const formConfig: FormConfig = {
     },
     {
       id: 'area',
-      label: 'Area de interesse',
+      label: 'Área de interesse',
       type: 'combo',
       required: true,
       options: [
@@ -88,7 +88,7 @@ export const formConfig: FormConfig = {
     },
     {
       id: 'notifications',
-      label: 'Receber notificacoes',
+      label: 'Receber notificações',
       type: 'switch',
       required: false,
     },
